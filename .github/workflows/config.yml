@@ -37,7 +37,7 @@ jobs:
           sops -d -i dev/config.json
 
       - name: Deploy to k8s Cluster
-        uses: WyriHaximus/github-action-helm3
+        uses: WyriHaximus/github-action-helm3@v3
         with:
           kubeconfig: ${{ secrets.KUBECONFIG }}
           exec: |
