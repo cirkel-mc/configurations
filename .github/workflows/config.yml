@@ -1,0 +1,45 @@
+name: Update Configuration
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  file_changes:
+    name: List all File Changes
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Changes Files
+        id: changes_files
+        uses: tj-actions/changed-files@v35
+        with:
+          dir_names: "true"
+
+  deploy:
+    name: Deploy updated Configurations
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install SOPS
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sops
+
+      - name: Decrypt Configs
+        run: |
+          export VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}
+          sops -d -i dev/config.json
+
+      - name: Deploy to k8s Cluster
+        uses: WyriHaximus/github-action-helm3
+        with:
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+          exec: |
+            cd dev
+            kubectl exec -it -n etcd etcd-0 bash -- etcdctl put dev "$(jq '.' -c shared_key.json)"
