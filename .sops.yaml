@@ -1,3 +1,2 @@
 creation_rules:
-  - pgp: >-
-      FF2EA705C1DE9405D71A9CFB34151AA952C1F31A
+  - hc_vault_transit_uri: "http://103.127.99.59:30282/v1/sops/keys/dev-sops"
