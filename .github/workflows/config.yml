@@ -41,6 +41,7 @@ jobs:
       - name: Deploy to k8s Cluster
         uses: yokawasa/action-setup-kube-tools@v0.9.2
       - run: |
+          cd dev
           kubectl config set-cluster ${{ secrets.CLUSTER_NAME }} --server="${{ secrets.CLUSTER_SERVER }}"
           kubectl config set-context ${{ secrets.CLUSTER_ALIAS }} --cluster=${{ secrets.CLUSTER_NAME }} --user=${{ secrets.CLUSTER_USER }}
           kubectl config set clusters.${{ secrets.CLUSTER_NAME }}.certificate-authority-data "${{ secrets.CLUSTER_CERFITICATE_AUTHORITY }}"
