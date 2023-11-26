@@ -30,4 +30,3 @@ go.work
 .conf
 
 # Extenstions not allowed in the project
-*.json
