@@ -28,10 +28,9 @@ jobs:
 
       - name: Install SOPS
         run: |
-          SOPS_LATEST_VERSION=$(curl -s "https://api.github.com/repos/mozilla/sops/releases/latest" | grep -Po '"tag_name": "v\K[0-9.]+')
-          curl -Lo sops.deb "https://github.com/mozilla/sops/releases/latest/download/sops_${SOPS_LATEST_VERSION}_amd64.deb"
-          sudo apt --fix-broken install ./sops.deb
-          rm -rf sops.deb
+          curl -LO https://github.com/getsops/sops/releases/download/v3.8.1/sops-v3.8.1.linux.amd64
+          mv sops-v3.8.1.linux.amd64 /usr/local/bin/sops
+          chmod +x /usr/local/bin/sops
           sops --version
 
       - name: Decrypt Configs
