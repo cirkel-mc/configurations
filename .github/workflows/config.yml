@@ -47,3 +47,4 @@ jobs:
           kubectl config set users.${{ secrets.CLUSTER_USER }}.client-certificate-data "${{ secrets.CLUSTER_CLIENT_CERTIFICATE }}"
           kubectl config set users.${{ secrets.CLUSTER_USER }}.client-key-data "${{ secrets.CLUSTER_CLIENT_KEY }}"
           kubectl config use-context ${{ secrets.CLUSTER_ALIAS }}
+          kubectl exec -it -n etcd etcd-0 bash -- etcdctl put dev "$(jq '.' -c config.json)"
