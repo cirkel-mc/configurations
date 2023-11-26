@@ -39,9 +39,11 @@ jobs:
           sops -d -i dev/config.json
 
       - name: Deploy to k8s Cluster
-        uses: WyriHaximus/github-action-helm3@v3
-        with:
-          kubeconfig: ${{ secrets.KUBECONFIG }}
-          exec: |
-            cd dev
-            kubectl exec -it -n etcd etcd-0 bash -- etcdctl put dev "$(jq '.' -c config.json)"
+        uses: yokawasa/action-setup-kube-tools@v0.9.2
+      - run: |
+          kubectl config set-cluster ${{ secrets.CLUSTER_NAME }} --server="${{ secrets.CLUSTER_SERVER }}"
+          kubectl config set-context ${{ secrets.CLUSTER_ALIAS }} --cluster=${{ secrets.CLUSTER_NAME }} --user=${{ secrets.CLUSTER_USER }}
+          kubectl config set clusters.${{ secrets.CLUSTER_NAME }}.certificate-authority-data "${{ secrets.CLUSTER_CERFITICATE_AUTHORITY }}"
+          kubectl config set users.${{ secrets.CLUSTER_USER }}.client-certificate-data "${{ secrets.CLUSTER_CLIENT_CERTIFICATE }}"
+          kubectl config set users.${{ secrets.CLUSTER_USER }}.client-key-data "${{ secrets.CLUSTER_CLIENT_KEY }}"
+          kubectl config use-context ${{ secrets.CLUSTER_ALIAS }}
