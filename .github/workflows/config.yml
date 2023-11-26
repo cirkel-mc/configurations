@@ -44,4 +44,4 @@ jobs:
           kubeconfig: ${{ secrets.KUBECONFIG }}
           exec: |
             cd dev
-            kubectl exec -it -n etcd etcd-0 bash -- etcdctl put dev "$(jq '.' -c shared_key.json)"
+            kubectl exec -it -n etcd etcd-0 bash -- etcdctl put dev "$(jq '.' -c config.json)"
