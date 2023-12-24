@@ -15,10 +15,8 @@ jobs:
       - name: Changes Files
         id: changes_files
         uses: tj-actions/changed-files@v35
-        with:
-          dir_names: "true"
     outputs:
-      list_directories: ${{ steps.changes_files.outputs.all_changed_files }}
+      list_files: ${{ steps.changes_files.outputs.all_changed_files }}
 
   deploy:
     name: Deploy updated Configurations
