@@ -54,7 +54,7 @@ jobs:
             for dir in $(echo ${{ needs.changes.outputs.list_directories }}); do
               if [ $(echo $dir | cut -d '/' -f1) == "dev" ]
               then
-                serviceName = $(echo $dir | cut -d '/' -f3)
+                serviceName=$(echo $dir | cut -d '/' -f3)
                 sops -d -i dev/service/$serviceName.json --config ./
                 js -s '.[0] * .[1]' dev/shared/shared.json dev/service/$serviceName.json > dev_$serviceName.json
                 kubectl exec -it -n vault vault-0 bash -- vault write auth/approle/login role_id="${{ secrets.VAULT_ROLE_ID }}" secret_id="${{ secrets.VAULT_SECRET_ID }}" && \
