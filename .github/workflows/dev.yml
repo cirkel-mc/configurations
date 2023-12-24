@@ -1,0 +1,63 @@
+name: Update Configuration
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  changes:
+    name: List all File Changes
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Changes Files
+        id: changes_files
+        uses: tj-actions/changed-files@v35
+        with:
+          dir_names: "true"
+    outputs:
+      list_directories: ${{ steps.changes_files.outputs.all_changed_files }}
+
+  deploy:
+    name: Deploy updated Configurations
+    runs-on: ubuntu-latest
+    needs:
+      - changes
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install SOPS
+        run: |
+          curl -LO https://github.com/getsops/sops/releases/download/v3.8.1/sops-v3.8.1.linux.amd64
+          mv sops-v3.8.1.linux.amd64 /usr/local/bin/sops
+          chmod +x /usr/local/bin/sops
+          sops --version
+
+      - name: Decrypt Configs
+        run: |
+          sops -d -i dev/config.json
+
+      - name: Update the Configuration
+        uses: wahyd4/kubectl-helm-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
+        with:
+          args: |
+            export VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}
+            export VAULT_ADDR=${{ secrets.VAULT_ADDR }}
+            sops -d -i dev/shared/shared.json
+
+            for dir in $(echo ${{ needs.changes.outputs.list_directories }}); do
+              if [ $(echo $dir | cut -d '/' -f1) == "dev" ] then
+                serviceName = $(echo $dir | cut -d '/' -f3)
+                sops -d -i dev/service/$serviceName.json
+                js -s '.[0] * .[1]' dev/shared/shared.json dev/service/$serviceName.json > dev_$serviceName.json
+
+                kubectl exec -it -n vault vault-0 bash -- vault write auth/approle/login role_id="${{ secrets.VAULT_ROLE_ID }}" secret_id="${{ secrets.VAULT_SECRET_ID }}" && \
+                  vault kv put -format=json cirkel-dev/config @dev/service/$serviceName.json
+              fi
+            done

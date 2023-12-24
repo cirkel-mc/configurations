@@ -1,2 +1,2 @@
 creation_rules:
-  - hc_vault_transit_uri: "http://103.127.99.59:32575/v1/sops/keys/dev-sops"
+  - hc_vault_transit_uri: "http://103.127.99.59:31999/v1/sops/keys/cirkel-dev"
