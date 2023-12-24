@@ -30,12 +30,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install SOPS
-        run: |
-          curl -LO https://github.com/getsops/sops/releases/download/v3.8.1/sops-v3.8.1.linux.amd64
-          mv sops-v3.8.1.linux.amd64 /usr/local/bin/sops
-          chmod +x /usr/local/bin/sops
-          sops --version
+      # - name: Install SOPS
+      #   run: |
+      #     curl -LO https://github.com/getsops/sops/releases/download/v3.8.1/sops-v3.8.1.linux.amd64
+      #     mv sops-v3.8.1.linux.amd64 /usr/local/bin/sops
+      #     chmod +x /usr/local/bin/sops
+      #     sops --version
 
       - name: Update the Configuration
         uses: wahyd4/kubectl-helm-action@master
@@ -43,6 +43,10 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
         with:
           args: |
+            curl -LO https://github.com/getsops/sops/releases/download/v3.8.1/sops-v3.8.1.linux.amd64
+            mv sops-v3.8.1.linux.amd64 /usr/local/bin/sops
+            chmod +x /usr/local/bin/sops
+            sops --version
             export VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}
             export VAULT_ADDR=${{ secrets.VAULT_ADDR }}
             sops -d -i dev/shared/shared.json
