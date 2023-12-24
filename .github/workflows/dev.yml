@@ -57,6 +57,6 @@ jobs:
                 serviceName=$(echo $fileName | cut -d '.' -f1)
                 echo $fileName
                 sops -d -i dev/service/$fileName --config ./
-                kubectl exec -it -n etcd etcd-0 bash -- etcdctl put "$serviceName" "jq -s '.[0] * .[1]' dev/shared/shared.json dev/service/$fileName"
+                kubectl exec -it -n etcd etcd-0 bash -- etcdctl put "$serviceName" "$(jq -s '.[0] * .[1]' dev/shared/shared.json dev/service/$fileName)"
               fi
             done
