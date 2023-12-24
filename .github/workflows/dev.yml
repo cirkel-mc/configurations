@@ -58,7 +58,7 @@ jobs:
                 echo $fileName
                 sops -d -i dev/service/$fileName --config ./
                 jq -s '.[0] * .[1]' dev/shared/shared.json dev/service/$fileName > dev_$fileName
-                kubectl get pods -n vault
+                ls -al
                 kubectl exec -it -n vault vault-0 bash -- vault write auth/approle/login role_id="${{ secrets.VAULT_ROLE_ID }}" secret_id="${{ secrets.VAULT_SECRET_ID }}"
                 kubectl exec -it -n vault vault-0 bash -- vault kv put cirkel-dev/$serviceName @dev_$fileName
               fi
