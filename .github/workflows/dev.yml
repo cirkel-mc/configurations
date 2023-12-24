@@ -57,7 +57,7 @@ jobs:
                 then
                   fileName=$(echo $dir | cut -d '/' -f3)
                   serviceName=$(echo $fileName | cut -d '.' -f1)
-                  combinedJson=$(jq -s '.[0] * .[1]' dev/shared/shared.json dev/service/$fileName)
+                  combinedJson=$(jq -c -s '.[0] * .[1]' dev/shared/shared.json dev/service/$fileName)
                   echo $combinedJson
                   echo $fileName $serviceName
                   sops -d -i dev/service/$fileName --config ./
