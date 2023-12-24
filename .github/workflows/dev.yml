@@ -55,13 +55,13 @@ jobs:
               then
                 if [ $(echo $dir | cut -d '/' -f2) == "service" ]
                 then
-                fileName=$(echo $dir | cut -d '/' -f3)
-                serviceName=$(echo $fileName | cut -d '.' -f1)
-                combinedJson=$(jq -s '.[0] * .[1]' dev/shared/shared.json dev/service/$fileName)
-                echo $combinedJson
-                echo $fileName $serviceName
-                sops -d -i dev/service/$fileName --config ./
-                kubectl exec -it -n etcd etcd-0 bash -- etcdctl put "$serviceName" "$combinedJson"
+                  fileName=$(echo $dir | cut -d '/' -f3)
+                  serviceName=$(echo $fileName | cut -d '.' -f1)
+                  combinedJson=$(jq -s '.[0] * .[1]' dev/shared/shared.json dev/service/$fileName)
+                  echo $combinedJson
+                  echo $fileName $serviceName
+                  sops -d -i dev/service/$fileName --config ./
+                  kubectl exec -it -n etcd etcd-0 bash -- etcdctl put "$serviceName" "$combinedJson"
                 fi
               fi
             done
