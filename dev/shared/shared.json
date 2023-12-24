@@ -1,9 +1,29 @@
 {
-	"http_port": "8000",
-	"grpc_port": "7000",
+	"http_port": "ENC[AES256_GCM,data:ZeQlUw==,iv:kOYhdBs9VdWQTYutSW8+HvX6iNH8H/iuCr3j1GqwesU=,tag:+oQmU/glu4CMTTPCygMJPQ==,type:str]",
+	"grpc_port": "ENC[AES256_GCM,data:cJchbQ==,iv:JLc6EqcaIi5XFb5FbirFT4S7YIOoDPdEiGOzeT5f2mE=,tag:2CgYLP2nmg97DhTQPJoL7Q==,type:str]",
 	"public_key": "",
 	"redis": [
-		"103.175.221.92:30060"
+		"ENC[AES256_GCM,data:HKMydcTa2SpN2jzupj3Nwr3yors=,iv:0PrNpJ+cTin0O68WeOFsVDm+8FydIq2NeEfEeRowp5U=,tag:A+pGbxJaYxglbrhvgmzBcQ==,type:str]"
 	],
-	"redis_master_name": "mymaster"
+	"redis_master_name": "ENC[AES256_GCM,data:pWfuYnhZ8nk=,iv:ae6EkG3ZRDq19oGxf7B503+nT69TLYxjC/qWWB6w51w=,tag:Wumx+jRLqK2XXfWeyBlDGg==,type:str]",
+	"sops": {
+		"kms": null,
+		"gcp_kms": null,
+		"azure_kv": null,
+		"hc_vault": [
+			{
+				"vault_address": "http://103.127.99.59:31999",
+				"engine_path": "sops",
+				"key_name": "cirkel-dev",
+				"created_at": "2023-12-24T16:44:59Z",
+				"enc": "vault:v1:QE730tDSpq2x8x4VtR7ek1keaafBvDQSyxfmyCVu9moM5ZqZRvBlNnK5LOuF5m7GfANmymF2yoDmXGy/R9rTWPZ4i4U0r6xmZAiKiP4gUGDvdsGH71oT4pF5goe/vzKP+5oM0/52ADVVqfpOsHeP0T4HrLjTHVG4/ONjYjWKyQFgybj+s0c01DaJqWMdTF0Rbp8SpdlqHMCZ7q9pWnMdFgVuWNO9pHPf//6XLZzWTfAd0alMcmqzJdLJz/kguvI7/BlGvYvP/oMApwqpBBK0b4I473AfbC4DY9LZ/+5kOyPwFncMejQGc+1VO0dQyvgnYSmnrV0wiZqjRXHj+Qo3xkVoRLqrzKCbZbGypbIVj9C6XlZCAaTTpOKJBcNXKSl8PqcaTZtNP+bJrWOWaNVFpgmnxEtrVDy5ipRO2ZgkbeiFhQefSgEBs8U6zEaSsFP7/L44fCH3QZ7Mxx/hxYPnYB2kmaRmABSTIInYnmW5eWyg3V5vzBxXCBodP/X/Sl4UnaSsR1U7yGVdPxz+L4SN/6Z9FoHDXK6Tto2BFr69JU5LjkpxGzy4+PhhWIUGpZTjCeNycoI7heFMjrDW41I+dk17oCeTyqTUWuEzQ9tdWtc7BLr2CARkms/T55qZtwBvtnMcx08oVL2QzC8HWBRNrmvn8oFyhKki8/nU9RRg9No="
+			}
+		],
+		"age": null,
+		"lastmodified": "2023-12-24T16:44:59Z",
+		"mac": "ENC[AES256_GCM,data:02r9wnXabYt5Ny+9Pi5akLtWSV521+vFGnSw1QEs1AqpkewJXvvF+mLR5xnk810MO0k8W4s+JRNcx/t/YUMr1gNrpCjTmVpXgAd5vF94oOmN9LvXaHqSPX7tn6doyN5quJoGEwUVzXC3wv5af6pxLf5UPXWlLJHiBDCmy4DQn+4=,iv:6QcYwa2J4Sa+m1oBUA6nVqFssLb656a7Ol5P4ToVCwg=,tag:bhgvU1j6zcMG48F30wHH6g==,type:str]",
+		"pgp": null,
+		"unencrypted_suffix": "_unencrypted",
+		"version": "3.7.3"
+	}
 }

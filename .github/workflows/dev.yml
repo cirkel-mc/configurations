@@ -38,6 +38,7 @@ jobs:
       - name: Deploy to k8s Cluster
         uses: yokawasa/action-setup-kube-tools@v0.9.2
       - run: |
+          mkdir $HOME/.kube
           echo ${{ secrets.KUBECONFIG }} > $HOME/.kube/config
           export VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}
           export VAULT_ADDR=${{ secrets.VAULT_ADDR }}
