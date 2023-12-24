@@ -55,9 +55,9 @@ jobs:
               then
                 serviceName=$(echo $dir | cut -d '/' -f3)
                 echo $serviceName
-                sops -d -i dev/service/$serviceName.json --config ./
-                jq -s '.[0] * .[1]' dev/shared/shared.json dev/service/$serviceName.json > dev_$serviceName.json
+                sops -d -i dev/service/$serviceName --config ./
+                jq -s '.[0] * .[1]' dev/shared/shared.json dev/service/$serviceName > dev_$serviceName
                 kubectl exec -it -n vault vault-0 bash -- vault write auth/approle/login role_id="${{ secrets.VAULT_ROLE_ID }}" secret_id="${{ secrets.VAULT_SECRET_ID }}" && \
-                  vault kv put -format=json cirkel-dev/$serviceName @dev/service/$serviceName.json
+                  vault kv put -format=json cirkel-dev/$serviceName @dev_$serviceName
               fi
             done
