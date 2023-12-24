@@ -37,10 +37,6 @@ jobs:
           chmod +x /usr/local/bin/sops
           sops --version
 
-      - name: Decrypt Configs
-        run: |
-          sops -d -i dev/config.json
-
       - name: Update the Configuration
         uses: wahyd4/kubectl-helm-action@master
         env:
