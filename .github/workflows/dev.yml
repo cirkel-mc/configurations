@@ -45,7 +45,8 @@ jobs:
           sops -d -i dev/shared/shared.json
 
           for dir in $(echo ${{ needs.changes.outputs.list_files }}); do
-            if [ $(echo $dir | cut -d '/' -f1) == "dev" ]
+            parentDir=$(echo $dir | cut -d '/' -f1)
+            if [ $parentDir == "dev" ]
             then
               serviceType=$(echo $dir | cut -d '/' -f2)
               if [ $serviceType == "service" ]
@@ -54,6 +55,7 @@ jobs:
                 serviceName=$(echo $fileName | cut -d '.' -f1)
                 sops -d -i dev/service/$fileName
                 kubectl exec -it -n etcd etcd-0 bash -- etcdctl put "$serviceName" "$(jq -c -s '.[0] * .[1]' dev/shared/shared.json dev/service/$fileName)"
+                kubectl rollout restart deploy/$serviceName -n cirkel-dev
               fi
             fi
           done
