@@ -60,6 +60,7 @@ jobs:
 
               if [ $serviceType == "shared" ]
               then
+                ls
                 services=$(ls dev/service)
                 for service in services; do
                   serviceName=$(echo $fileName | cut -d '.' -f1)
