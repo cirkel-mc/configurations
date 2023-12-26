@@ -57,6 +57,17 @@ jobs:
                 kubectl exec -it -n etcd etcd-0 bash -- etcdctl put "$serviceName" "$(jq -c -s '.[0] * .[1]' dev/shared/shared.json dev/service/$fileName)"
                 kubectl rollout restart deploy/$serviceName -n cirkel-dev
               fi
+
+              if [ $serviceType == "shared" ]
+              then
+                services=$(ls dev/service)
+                for service in services; do
+                  serviceName=$(echo $fileName | cut -d '.' -f1)
+                  sops -d -i dev/service/$service
+                  kubectl exec -it -n etcd etcd-0 bash -- etcdctl put "$serviceName" "$(jq -c -s '.[0] * .[1]' dev/shared/shared.json dev/service/$service)"
+                  kubectl rollout restart deploy/$serviceName -n cirkel-dev
+                done
+              fi
             fi
           done
           
