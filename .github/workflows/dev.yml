@@ -63,7 +63,7 @@ jobs:
                 ls dev/service
                 services=$(ls dev/service)
                 for service in $services; do
-                  serviceName=$(echo $fileName | cut -d '.' -f1)
+                  serviceName=$(echo $service | cut -d '.' -f1)
                   sops -d -i dev/service/$service
                   kubectl exec -it -n etcd etcd-0 bash -- etcdctl put "$serviceName" "$(jq -c -s '.[0] * .[1]' dev/shared/shared.json dev/service/$service)"
                   kubectl rollout restart deploy/$serviceName -n cirkel-dev
