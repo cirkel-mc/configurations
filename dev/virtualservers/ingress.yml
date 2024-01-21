@@ -4,10 +4,7 @@ metadata:
   name: cirkel-backend
   namespace: cirkel-dev
   annotations:
-    nginx.org/client-max-body-size: "10m"
-    nginx.org/redirect-to-https: "true"
     nginx.org/rewrites: "serviceName=auth rewrite=/"
-    ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
