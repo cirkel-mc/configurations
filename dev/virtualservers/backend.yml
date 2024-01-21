@@ -1,7 +1,7 @@
 apiVersion: k8s.nginx.org/v1
 kind: VirtualServer
 metadata:
-  name: cirkel-backend
+  name: backend
   namespace: cirkel-dev
 spec:
   host: cirkel-dev.api.pandudpn.id
