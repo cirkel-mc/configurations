@@ -8,6 +8,10 @@ metadata:
     nginx.ingress.kubernetes.io/auth-url: http://auth.cirkel-dev.svc.cluster.local/validate
 spec:
   ingressClassName: nginx
+  tls:
+    - secretName: pg-api-tls
+      hosts:
+      - cirkel-dev.api.pandudpn.id
   rules:
   - host: cirkel-dev.api.pandudpn.id
     http:
