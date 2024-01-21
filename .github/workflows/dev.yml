@@ -35,9 +35,10 @@ jobs:
           chmod +x /usr/local/bin/sops
           sops --version
 
-      - name: Deploy to k8s Cluster
+      - name: Setup k8s Cluster
         uses: yokawasa/action-setup-kube-tools@v0.9.2
-      - run: |
+      - name: Deploy to Cluster
+        run: |
           mkdir $HOME/.kube
           echo ${{ secrets.KUBECONFIG }} | base64 -d > $HOME/.kube/config
           export VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}
@@ -69,6 +70,11 @@ jobs:
                   kubectl exec -it -n etcd etcd-0 bash -- etcdctl put "$serviceName" "$(jq -c -s '.[0] * .[1]' dev/shared/shared.json dev/service/$service)"
                   kubectl rollout restart deploy/$serviceName -n cirkel-dev
                 done
+              fi
+
+              if [ $serviceType == "virtualservers" ]
+              then
+                kubectl apply -f $dir
               fi
             fi
           done
