@@ -72,7 +72,7 @@ jobs:
                 done
               fi
 
-              if [ $serviceType == "virtualservers" ]
+              if [ $serviceType == "ingress" ]
               then
                 kubectl apply -f $dir
               fi
