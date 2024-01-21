@@ -6,7 +6,7 @@ metadata:
   annotations:
     nginx.org/rewrites: "serviceName=auth rewrite=/"
 spec:
-  ingressClassName: nginx
+  ingressClassName: monica-nginx
   tls:
   - secretName: pg-tls
     hosts:
