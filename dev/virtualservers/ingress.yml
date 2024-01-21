@@ -10,6 +10,10 @@ metadata:
     ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
+  tls:
+  - secretName: pg-tls
+    hosts:
+    - cirkel-api.pandudpn.id
   rules:
   - host: cirkel-api.pandudpn.id
     http:
