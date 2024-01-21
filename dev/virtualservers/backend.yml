@@ -13,7 +13,7 @@ spec:
     service: auth
     port: 80
   routes:
-  - path: ~ /auth?(.*)
+  - path: ~ /auth/?(.*)
     action: 
       proxy:
         upstream: auth
