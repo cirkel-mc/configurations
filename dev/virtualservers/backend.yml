@@ -1,0 +1,20 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: cirkel-backend
+  namespace: cirkel-dev
+spec:
+  host: cirkel-dev.api.pandudpn.id
+  ingressClassName: nginx
+  tls:
+    secret: pg-api-tls
+  upstreams:
+  - name: auth
+    service: auth
+    port: 80
+  routes:
+  - path: ~ /auth?(.*)
+    action: 
+      proxy:
+        upstream: auth
+        rewritePath: /$1
