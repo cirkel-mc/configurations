@@ -1,28 +1,10 @@
 {
-	"http_port": "ENC[AES256_GCM,data:TJR6Tw==,iv:adwZfy70QCGA4CExrJnhotBx2qaft1SlNHLDkxHOT0c=,tag:e2aTOuTwlBJZEaTFf6Wuzw==,type:str]",
-	"grpc_port": "ENC[AES256_GCM,data:uB7vAQ==,iv:KlymHNvT89gNHkDaOu0Jc7kqJOjj+3baf+nVSpoAfpo=,tag:d9la0YyDk+ZuB4aePlkD1w==,type:str]",
+	"debug": true,
+	"http_port": "8000",
+	"grpc_port": "7000",
 	"redis": [
-		"ENC[AES256_GCM,data:tc2fiWE1LNrkK090+YG+nJLVQkiaFIZLpbqIzx3i5RnB8m0=,iv:lzLI7wRbThO4TtuheEPjYM3rHd2XPnTFijjqnNkKglc=,tag:JGhPQ5h37c2EAKocdvnrmA==,type:str]"
+		"redis.redis.svc.cluster.local:26379"
 	],
-	"redis_master_name": "ENC[AES256_GCM,data:eRblL20DWxVYCPIW8m6B,iv:S9ZQvjwiz/FCSQYFW/cY38SfBkPeMRjDiw5reYqhaFo=,tag:N/G4j6vwGzJSuCmZvUpHkw==,type:str]",
-	"sops": {
-		"kms": null,
-		"gcp_kms": null,
-		"azure_kv": null,
-		"hc_vault": [
-			{
-				"vault_address": "http://103.127.99.59:31999",
-				"engine_path": "sops",
-				"key_name": "cirkel-dev",
-				"created_at": "2023-12-26T08:58:47Z",
-				"enc": "vault:v1:w5ioCwmgnPBYl0JpevL9rBUvv+ZvuBIb0+oD2h2tKkXxv/ATrVvhTbXZ1ecZXub3c9tF9pKco12/ZAXOWRMneH5bk57F/IbYfUInKxKWZ2M2ZSQ2LHqFMBvDpAGmVIZvYCXsnOwe8hQ+NL1K8PhEApKKr+8SEpEAdfpwYESR/DE4NEjLwM5p33nzdi0498iRyeq7RVKCwygr71XuQH8E8r9oYYNVeC4SFBfg57VdrO+bMHFQ5Ed3vZgqslFwRiVYZcQ/PxhEOen+ey2TT0u4Uk94mgnAcNNZoXzRCj3b5bHo7WMwW6jqL9p3uYqCYIQ9kZRFOjW1x3H6fV7+rJ2QuwcxEY9V38FjeeUwRqGEFw3AYUBKXUeHKsztvfQJzbILoc68wRBTw+/uFBnS/S5/t18jIyz+Wa4RMCdDuU+RnNEjjlrZUFhSQy3M8s2fvM+qxMibRK/WStWTvS+KGSBL9tWKquixvFLVNLNWSa/AHsDvFuJLsDeE0q5LXmFlOumaMqc2M8x/eJb9fPQjUU72bhm11SX0cm4vDJDQzW5bNnI7a7LYF/Lu9mbfyXolvpllQ8HYDBMYe8b5CSifzIdlJ5i5DrdLAztPepVVr57RjNyHrQj53ehLRmb546iB8KcN/XorCyISf3PBfGmmwI81ajrZdEZByd7+Wt7s9mlrwY4="
-			}
-		],
-		"age": null,
-		"lastmodified": "2023-12-26T08:58:47Z",
-		"mac": "ENC[AES256_GCM,data:XDokt3Fp2h7jvnhAxNwMYvy+AG0yI/cbXhExPLwsqtp20RcHpavu94CX2cukEQ7UszUNWq4fUxNYK6ekxnY9IoAZSnBUmPZzkrfNpMveYhaVBxRqXlbsdYXtiHSh4sCZ/WzhssKnj0hB9nA3gGRvTMU4bOcrlryv2yUEpVHxRHI=,iv:sWJ7NsYRSxcZKb0Hj7+KZ7A1jbBmYXi1RdLwAmgJGnc=,tag:lcrOYm0sT5XetWeOKZ5uaw==,type:str]",
-		"pgp": null,
-		"unencrypted_suffix": "_unencrypted",
-		"version": "3.7.3"
-	}
+	"redis_master_name": "pg-redis-master",
+	"auth_service": "auth.cirkel-dev.svc.cluster.local:7000"
 }
