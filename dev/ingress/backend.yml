@@ -23,3 +23,10 @@ spec:
             name: auth
             port:
               number: 80
+      - path: /user(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: user
+            port:
+              number: 80
